@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { AwsomeButton } from "..";
 import { Dialogues } from "../../Dialogues";
 import { useMapState } from "../../hooks";
 import { DataPeriodsInput } from "../DataPeriodsInput";
@@ -21,22 +22,23 @@ export const SideBar: FC<Props> = ({ className = "" }) => {
   return (
     <Container className={className}>
       <Heading>{Dialogues.PROJECT_NAME}</Heading>
-      <StateValuesInput
-        stateValues={stateValues}
-        setStateValues={setStateValues}
-      />
+
       <DataPeriodsInput
         periods={periods}
         onChange={setPeriods}
         min={minimumStateValue}
       />
-      <div
+      <StateValuesInput
+        stateValues={stateValues}
+        setStateValues={setStateValues}
+      />
+      <AwsomeButton
         onClick={() => {
           if (exportPdf) exportPdf();
         }}
       >
         {Dialogues.DOWNLOAD_EXPORT}
-      </div>
+      </AwsomeButton>
     </Container>
   );
 };

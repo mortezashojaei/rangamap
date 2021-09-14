@@ -1,9 +1,12 @@
 import { Dispatch, FC, SetStateAction, useRef, useState } from "react";
 import { Dialogues } from "../../Dialogues";
 import { useOutsideClick } from "../../hooks";
-import { StateValuesModel } from "../../models";
+import { IranStateType, StateValuesModel } from "../../models";
+import { AwsomeButton } from "../AwsomeButton";
 import { states } from "../Maps/states";
-import { StatesTable, StyledModal } from "./styled";
+import { Modal } from "../Modal";
+import { StatesTable, Container, TableContainer } from "./styled";
+import { chunk } from "./__helper__";
 
 type Props = {
   stateValues: StateValuesModel;
@@ -42,40 +45,54 @@ export const StateValuesInput: FC<Props> = ({
 
   return (
     <>
-      <div
+      <AwsomeButton
+        style={{ width: "100%" }}
         onClick={() => {
           setIsModalOpen(true);
         }}
       >
         {Dialogues.CHANGE_STATE_VALUES}
-      </div>
+      </AwsomeButton>
       {isModalOpen && (
-        <StyledModal ref={ref}>
-          <StatesTable>
-            <thead>
-              <tr>
-                <th>{Dialogues.STATE}</th>
-                <th>{Dialogues.VALUE}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {states.map((state) => (
-                <tr key={state.name}>
-                  <td>{state.persianName}</td>
-                  <td>
-                    <input
-                      onChange={(e) => handleInputChange(e, state.name)}
-                      value={
-                        stateValues.find((item) => item.state === state.name)
-                          ?.value || ""
-                      }
-                    />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </StatesTable>
-        </StyledModal>
+        <Modal>
+          <Container>
+            <TableContainer ref={ref}>
+              <StatesTable>
+                <thead>
+                  <tr>
+                    <th>{Dialogues.STATE}</th>
+                    <th>{Dialogues.VALUE}</th>
+                    <th>{Dialogues.STATE}</th>
+                    <th>{Dialogues.VALUE}</th>
+                    <th>{Dialogues.STATE}</th>
+                    <th>{Dialogues.VALUE}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {chunk<IranStateType>(states, 3).map((array, index) => (
+                    <tr key={index}>
+                      {array.map((state) => (
+                        <>
+                          <td>{state.persianName}</td>
+                          <td>
+                            <input
+                              onChange={(e) => handleInputChange(e, state.name)}
+                              value={
+                                stateValues.find(
+                                  (item) => item.state === state.name
+                                )?.value || ""
+                              }
+                            />
+                          </td>
+                        </>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </StatesTable>
+            </TableContainer>
+          </Container>
+        </Modal>
       )}
     </>
   );

@@ -2,13 +2,15 @@ import styled from "styled-components";
 
 export const Container = styled.main`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: space-between;
   background: #c8c6c6;
+  overflow: hidden;
 
   * {
     direction: rtl;
+    font-family: Vazir;
   }
 
   .map {
@@ -22,6 +24,8 @@ export const Container = styled.main`
   }
 
   .side-bar {
+    padding: 0 5%;
+    box-sizing: border-box;
     width: 30vw;
     background: #4b6587;
     border-radius: 5rem 0 0 5rem;
