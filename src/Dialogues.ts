@@ -4,4 +4,5 @@ export const Dialogues = {
   CHANGE_STATE_VALUES: "تعیین مقادیر استان ها",
   STATE: "استان",
   VALUE: "مقدار",
+  ADD_NEW_PERIOD: "افزودن بازه جدید",
 };

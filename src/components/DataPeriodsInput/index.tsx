@@ -1,7 +1,8 @@
 import { FC } from "react";
 import { ColorSelector } from "..";
+import { Dialogues } from "../../Dialogues";
 import { MapDataPeriodModel } from "../../models";
-import { Container } from "./styled";
+import { Container, PeriodContainer } from "./styled";
 
 export type PeriodsType = Array<MapDataPeriodModel>;
 
@@ -55,24 +56,32 @@ export const DataPeriodsInput: FC<Props> = ({ min, periods, onChange }) => {
   return (
     <Container>
       {periods.map(({ id, color, max }, index) => (
-        <div key={id}>
+        <PeriodContainer key={id}>
+          {index && index === periods.length - 1 ? (
+            <span className="close" onClick={() => deleteLastPeriod(index)}>
+              &#x274C;
+            </span>
+          ) : null}
+
+          <div className="form-group">
+            <input
+              value={max}
+              onChange={(e) => handleChangeMax(Number(e.target.value), id)}
+              className="form-field"
+              type="email"
+            />
+            <span>{"---"}</span>
+            <span>{index ? periods[index - 1].max : min}</span>
+          </div>
           <ColorSelector
             value={color}
             onChange={(c) => {
               handleChangeColor(c, id);
             }}
           />
-          {index ? periods[index - 1].max : min}-
-          <input
-            value={max}
-            onChange={(e) => handleChangeMax(Number(e.target.value), id)}
-          />
-          {index && index === periods.length - 1 ? (
-            <span onClick={() => deleteLastPeriod(index)}>X</span>
-          ) : null}
-        </div>
+        </PeriodContainer>
       ))}
-      <button onClick={onAddNewPeriod}>اضافه کردن جدید</button>
+      <button onClick={onAddNewPeriod}>{Dialogues.ADD_NEW_PERIOD}</button>
     </Container>
   );
 };

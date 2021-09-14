@@ -1,7 +1,7 @@
 import { FC, useRef, useState } from "react";
 import { ColorChangeHandler, SketchPicker } from "react-color";
 import { useOutsideClick } from "../../hooks/useOutsideClick";
-import { Circle, Container, Popover } from "./styled";
+import { Circle, Container, Cover, Popover } from "./styled";
 
 type Props = {
   value?: string;
@@ -19,13 +19,15 @@ export const ColorSelector: FC<Props> = ({ value = "red", onChange }) => {
     <Container>
       <Circle
         onClick={() => {
-          setShowPalette(true);
+          setShowPalette(!showPalette);
         }}
         color={value}
       />
       {showPalette ? (
         <Popover ref={ref}>
-          <SketchPicker color={value} onChange={handleChange} />
+          <Cover>
+            <SketchPicker color={value} onChange={handleChange} />
+          </Cover>
         </Popover>
       ) : null}
     </Container>

@@ -31,7 +31,7 @@ export const StyledButton = styled.button`
   :after {
     content: "";
     position: absolute;
-    border: 1px solid #000000;
+    border: 1px solid #cdd9ed;
     bottom: 4px;
     left: 4px;
     width: calc(100% - 1px);

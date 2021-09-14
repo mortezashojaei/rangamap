@@ -2,14 +2,19 @@ import styled from "styled-components";
 
 export const Container = styled.div``;
 
+export const Cover = styled.div`
+  position: fixed;
+`;
+
 export const Circle = styled.div<{ color: string }>`
-  width: 2rem;
-  height: 2rem;
-  background: ${(props) => props.color};
+  width: 3rem;
+  height: 3rem;
   border-radius: 50%;
-  cursor: "pointer";
+  background: ${(props) => props.color};
+  cursor: pointer;
 `;
 
 export const Popover = styled.div`
-  z-index: 2;
+  z-index: 1000;
+  position: absolute;
 `;
