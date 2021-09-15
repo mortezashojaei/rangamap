@@ -70,7 +70,7 @@ export const DataPeriodsInput: FC<Props> = ({ min, periods, onChange }) => {
               className="form-field"
               type="email"
             />
-            <span>{"---"}</span>
+            <span>{Dialogues.TO}</span>
             <span>{index ? periods[index - 1].max : min}</span>
           </div>
           <ColorSelector

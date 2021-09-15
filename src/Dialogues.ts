@@ -5,4 +5,5 @@ export const Dialogues = {
   STATE: "استان",
   VALUE: "مقدار",
   ADD_NEW_PERIOD: "افزودن بازه جدید",
+  TO: "تا",
 };

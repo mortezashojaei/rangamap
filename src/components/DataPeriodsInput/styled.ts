@@ -56,13 +56,14 @@ export const Container = styled.div`
       position: relative;
       z-index: 1;
       flex: 1 1 auto;
-      width: 1%;
+      width: 6rem;
       margin-top: 0;
       margin-bottom: 0;
     }
     & > span {
       text-align: center;
-      padding: 8px 2rem;
+      padding: 8px 0.6rem;
+      width: 6rem;
       font-size: 14px;
       line-height: 25px;
       color: #99a3ba;
@@ -89,15 +90,16 @@ export const Container = styled.div`
 export const PeriodContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   margin-bottom: 1.4rem;
+  width: 100%;
 
   .form-group {
     margin-left: 1rem;
   }
 
   .close {
-    padding: 0 0.2rem;
+    padding: 0 0.6rem;
     cursor: pointer;
   }
 `;
