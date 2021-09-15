@@ -27,13 +27,13 @@ export const SideBar: FC<Props> = ({ className = "" }) => {
     <Container className={className}>
       <Heading>{Dialogues.PROJECT_NAME}</Heading>
 
-      <SelectRegion onChange={setRegions} />
-
       <DataPeriodsInput
         periods={periods}
         onChange={setPeriods}
         min={minimumStateValue}
       />
+      <SelectRegion onChange={setRegions} />
+
       <RegionValuesInput
         regionValues={values}
         setRegionValues={setValues}
