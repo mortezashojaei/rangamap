@@ -38,7 +38,7 @@ export const TableContainer = styled.div`
   max-height: 98vh;
 `;
 
-export const StatesTable = styled.table`
+export const RegionsTable = styled.table`
   border-collapse: collapse;
   width: 100%;
   position: relative;

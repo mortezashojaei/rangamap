@@ -1,4 +1,4 @@
-export * from "./Maps";
+export * from "./Map";
 export * from "./SideBar";
 export * from "./App";
 export * from "./ColorSelector";

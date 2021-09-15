@@ -1,4 +1,4 @@
-import { Iran, SideBar } from "..";
+import { Map, SideBar } from "..";
 import { MapProvider } from "../../store";
 import { Container } from "./styled";
 import { useMapState } from "../../hooks";
@@ -14,11 +14,11 @@ function App() {
 export default App;
 
 const Main = () => {
-  const { pdfRef } = useMapState();
+  const { pdfRef, regions } = useMapState();
   return (
     <Container>
       <div className="map" ref={pdfRef}>
-        <Iran className="map" />
+        <Map regions={regions.region} className="map" />
       </div>
       <SideBar className="side-bar" />
     </Container>

@@ -14,6 +14,8 @@ export const Container = styled.main`
   }
 
   .map {
+    box-sizing: border-box;
+    padding-top: 2rem;
     align-self: center;
     width: 100%;
     height: 100vh;

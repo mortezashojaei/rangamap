@@ -1,17 +1,21 @@
 import { Dispatch, SetStateAction } from "react";
 import {
   MapDataPeriodModel,
-  StateColorsModel,
-  StateValuesModel,
+  RegionColorsModel,
+  RegionType,
+  SupportedRegionType,
+  RegionValuesModel,
 } from "../../models";
 
 export type MapContextType = {
   periods: MapDataPeriodModel[];
   setPeriods: Dispatch<SetStateAction<MapDataPeriodModel[]>>;
-  stateValues: StateValuesModel;
-  setStateValues: Dispatch<SetStateAction<StateValuesModel>>;
-  stateColors: StateColorsModel;
+  values: RegionValuesModel;
+  setValues: Dispatch<SetStateAction<RegionValuesModel>>;
+  regionColors: RegionColorsModel;
   minimumStateValue: number;
   pdfRef?: any;
   exportPdf?: () => void;
+  regions: SupportedRegionType;
+  setRegions: Dispatch<SetStateAction<SupportedRegionType>>;
 };

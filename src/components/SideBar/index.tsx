@@ -2,8 +2,10 @@ import { FC } from "react";
 import { AwsomeButton } from "..";
 import { Dialogues } from "../../Dialogues";
 import { useMapState } from "../../hooks";
+import { Regions } from "../../regions";
 import { DataPeriodsInput } from "../DataPeriodsInput";
-import { StateValuesInput } from "../StateValuesInput";
+import { RegionValuesInput } from "../RegionValuesInput";
+import { SelectRegion } from "../SelectRegion";
 import { Container, Heading } from "./styled";
 
 type Props = {
@@ -14,23 +16,28 @@ export const SideBar: FC<Props> = ({ className = "" }) => {
   const {
     periods,
     setPeriods,
-    stateValues,
-    setStateValues,
+    values,
+    setValues,
     minimumStateValue,
     exportPdf,
+    regions,
+    setRegions,
   } = useMapState();
   return (
     <Container className={className}>
       <Heading>{Dialogues.PROJECT_NAME}</Heading>
+
+      <SelectRegion onChange={setRegions} />
 
       <DataPeriodsInput
         periods={periods}
         onChange={setPeriods}
         min={minimumStateValue}
       />
-      <StateValuesInput
-        stateValues={stateValues}
-        setStateValues={setStateValues}
+      <RegionValuesInput
+        regionValues={values}
+        setRegionValues={setValues}
+        regions={regions.region}
       />
       <AwsomeButton
         onClick={() => {

@@ -5,35 +5,41 @@ import html2canvas from "html2canvas";
 import { contextDefaultValue } from ".";
 import {
   MapDataPeriodModel,
-  StateColorsModel,
-  StateValuesModel,
+  RegionColorsModel,
+  RegionValuesModel,
+  SupportedRegionType,
 } from "../../models";
 
 import { mapContext } from "./context";
 import { Dialogues } from "../../Dialogues";
+import { Regions } from "../../regions";
 
 export const MapProvider: FC = ({ children }) => {
   const [periods, setPeriods] = useState<MapDataPeriodModel[]>(
     contextDefaultValue.periods
   );
 
-  const [stateValues, setStateValues] = useState<StateValuesModel>(
-    contextDefaultValue.stateValues
+  const [values, setValues] = useState<RegionValuesModel>(
+    contextDefaultValue.values
+  );
+
+  const [regions, setRegions] = useState<SupportedRegionType>(
+    contextDefaultValue.regions
   );
 
   const minimumStateValue = Math.min.apply(
     null,
-    stateValues.map((item) => item.value)
+    values.map((item) => item.value)
   );
 
-  const stateColors: StateColorsModel = stateValues.map(({ state, value }) => ({
+  const regionColors: RegionColorsModel = values.map(({ name, value }) => ({
     color:
       periods.find(
         (period, index) =>
           period.max > value &&
           value >= (index ? periods[index - 1].max : minimumStateValue)
       )?.color || "",
-    state,
+    name,
   }));
 
   const pdfRef = useRef<HTMLDivElement>();
@@ -53,11 +59,13 @@ export const MapProvider: FC = ({ children }) => {
     pdfRef,
     periods,
     setPeriods,
-    stateValues,
-    setStateValues,
-    stateColors,
+    values,
+    setValues,
+    regionColors,
     minimumStateValue,
     exportPdf,
+    regions,
+    setRegions,
   };
 
   return (

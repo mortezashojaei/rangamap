@@ -1,4 +1,5 @@
 import React from "react";
+import { Regions } from "../../regions";
 import { MapContextType } from "./types";
 
 export const contextDefaultValue: MapContextType = {
@@ -10,19 +11,16 @@ export const contextDefaultValue: MapContextType = {
     },
   ],
   setPeriods: () => {},
-  stateValues: [
-    { state: "Tehran", value: 20 },
-    { state: "Hamedan", value: 60 },
-    { state: "Ilam", value: 100 },
-    { state: "Karaj", value: 180 },
-  ],
-  setStateValues: () => {},
-  stateColors: [
+  values: [{ name: "Tehran", value: 40 }],
+  setValues: () => {},
+  regionColors: [
     {
-      state: "Tehran",
+      name: "Tehran",
       color: "blue",
     },
   ],
+  regions: Regions[0],
+  setRegions: () => {},
   minimumStateValue: 0,
 };
 

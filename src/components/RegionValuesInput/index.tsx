@@ -1,21 +1,22 @@
 import { Dispatch, FC, SetStateAction, useRef, useState } from "react";
 import { Dialogues } from "../../Dialogues";
 import { useOutsideClick } from "../../hooks";
-import { IranStateType, StateValuesModel } from "../../models";
+import { RegionType, RegionValuesModel } from "../../models";
 import { AwsomeButton } from "../AwsomeButton";
-import { states } from "../Maps/states";
 import { Modal } from "../Modal";
-import { StatesTable, Container, TableContainer } from "./styled";
+import { RegionsTable, Container, TableContainer } from "./styled";
 import { chunk } from "./__helper__";
 
 type Props = {
-  stateValues: StateValuesModel;
-  setStateValues: Dispatch<SetStateAction<StateValuesModel>>;
+  regionValues: RegionValuesModel;
+  setRegionValues: Dispatch<SetStateAction<RegionValuesModel>>;
+  regions: RegionType[];
 };
 
-export const StateValuesInput: FC<Props> = ({
-  stateValues,
-  setStateValues,
+export const RegionValuesInput: FC<Props> = ({
+  regionValues,
+  setRegionValues,
+  regions,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -25,20 +26,20 @@ export const StateValuesInput: FC<Props> = ({
 
   function handleInputChange(
     e: React.ChangeEvent<HTMLInputElement>,
-    state: string
+    region: string
   ) {
     const value = Number(e.target.value);
     if (isNaN(value)) {
-      setStateValues(stateValues.filter((item) => item.state !== state));
+      setRegionValues(regionValues.filter((item) => item.name !== region));
     } else {
-      if (stateValues.find((item) => item.state === state)) {
-        setStateValues(
-          stateValues.map((item) =>
-            item.state === state ? { state, value } : item
+      if (regionValues.find((item) => item.name === region)) {
+        setRegionValues(
+          regionValues.map((item) =>
+            item.name === region ? { name: region, value } : item
           )
         );
       } else {
-        setStateValues([...stateValues, { state, value }]);
+        setRegionValues([...regionValues, { name: region, value }]);
       }
     }
   }
@@ -57,29 +58,31 @@ export const StateValuesInput: FC<Props> = ({
         <Modal>
           <Container>
             <TableContainer ref={ref}>
-              <StatesTable>
+              <RegionsTable>
                 <thead>
                   <tr>
-                    <th>{Dialogues.STATE}</th>
+                    <th>{Dialogues.REGION}</th>
                     <th>{Dialogues.VALUE}</th>
-                    <th>{Dialogues.STATE}</th>
+                    <th>{Dialogues.REGION}</th>
                     <th>{Dialogues.VALUE}</th>
-                    <th>{Dialogues.STATE}</th>
+                    <th>{Dialogues.REGION}</th>
                     <th>{Dialogues.VALUE}</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {chunk<IranStateType>(states, 3).map((array, index) => (
+                  {chunk<RegionType>(regions, 3).map((array, index) => (
                     <tr key={index}>
-                      {array.map((state) => (
+                      {array.map((region) => (
                         <>
-                          <td>{state.persianName}</td>
+                          <td>{region.persianName}</td>
                           <td>
                             <input
-                              onChange={(e) => handleInputChange(e, state.name)}
+                              onChange={(e) =>
+                                handleInputChange(e, region.name)
+                              }
                               value={
-                                stateValues.find(
-                                  (item) => item.state === state.name
+                                regionValues.find(
+                                  (item) => item.name === region.name
                                 )?.value || ""
                               }
                             />
@@ -89,7 +92,7 @@ export const StateValuesInput: FC<Props> = ({
                     </tr>
                   ))}
                 </tbody>
-              </StatesTable>
+              </RegionsTable>
             </TableContainer>
           </Container>
         </Modal>

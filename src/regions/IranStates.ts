@@ -1,6 +1,6 @@
-import { IranStateType } from "../../models";
+import { RegionType } from "../models";
 
-export const states: Array<IranStateType> = [
+export const IranStates: Array<RegionType> = [
   {
     name: "WestAzerbaijan",
     persianName: "آذربایجان غربی",

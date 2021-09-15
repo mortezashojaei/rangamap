@@ -4,12 +4,18 @@ export type MapDataPeriodModel = {
   max: number;
 };
 
-export type StateColorsModel = Array<{ state: string; color: string }>;
+export type RegionColorsModel = Array<{ name: string; color: string }>;
 
-export type StateValuesModel = Array<{ state: string; value: number }>;
+export type RegionValuesModel = Array<{ name: string; value: number }>;
 
-export type IranStateType = {
+export type RegionType = {
   name: string;
   persianName: string;
   path: string;
+};
+
+export type SupportedRegionType = {
+  id: string;
+  region: RegionType[];
+  persionName: string;
 };
