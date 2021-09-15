@@ -1,4 +1,4 @@
-import { FC, useRef, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
 
@@ -12,7 +12,6 @@ import {
 
 import { mapContext } from "./context";
 import { Dialogues } from "../../Dialogues";
-import { Regions } from "../../regions";
 
 export const MapProvider: FC = ({ children }) => {
   const [periods, setPeriods] = useState<MapDataPeriodModel[]>(
@@ -54,6 +53,10 @@ export const MapProvider: FC = ({ children }) => {
         pdf.save(`${Dialogues.PROJECT_NAME}.pdf`);
       });
   };
+
+  useEffect(() => {
+    setValues([]);
+  }, [regions]);
 
   const contextValue = {
     pdfRef,
